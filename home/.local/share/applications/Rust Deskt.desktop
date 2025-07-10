@@ -1,0 +1,13 @@
+[Desktop Entry]
+Comment=
+Exec=/home/donovan/rustdesk-1.3.0-x86_64.appimage
+Icon=/home/donovan/icons/rust_desk.png
+Name=Rust Desk
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=

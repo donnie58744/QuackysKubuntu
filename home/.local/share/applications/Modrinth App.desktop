@@ -1,0 +1,15 @@
+[Desktop Entry]
+Categories=Game;
+Comment=
+Exec='/home/donovan/Modrinth App_0.9.5_amd64.AppImage'
+Icon=/home/donovan/Downloads/67560307.png
+MimeType=application/x-modrinth-modpack+zip;x-scheme-handler/modrinth
+Name=Modrinth App
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=

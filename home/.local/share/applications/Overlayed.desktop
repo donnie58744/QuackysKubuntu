@@ -1,0 +1,17 @@
+[Desktop Entry]
+Comment=
+Exec=/home/donovan/Overlayed_0.6.2_amd64.AppImage
+GenericName[en_US]=
+GenericName=
+Icon=/home/donovan/icons/overlayed.png
+MimeType=x-scheme-handler/overlayed
+Name=Overlayed
+NoDisplay=false
+Path=
+PrefersNonDefaultGPU=false
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
