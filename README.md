@@ -242,6 +242,7 @@ sudo nano /etc/bluetooth/main.conf
 | Handbrake             | `flatpak install flathub fr.handbrake.ghb`   | Video compression tool  |
 | Jackett             | `sudo git clone https://github.com/Jackett/Jackett.git /usr/share/Jackett/`   |   |
 | Linux Gamemode      | Read Instructions Below                | Enables gamemode on linux  |
+| LM Studio | https://lmstudio.ai/download | Lets you host LLMs from huggingface and other places |
 | NOAA-APT            | https://noaa-apt.mbernardi.com.ar/download.html | Decodes APT wav files  |
 | Overlayed | https://github.com/overlayeddev/overlayed/releases | Gives you voice activity overlay for Discord |
 | Playback          |   Read instructions below                            | Program for the Gameboy cart reader  |
@@ -280,7 +281,46 @@ sudo nano /etc/bluetooth/main.conf
 | Vortex | Bottles with Vortex      | Read instructions below   | Lets you download mods and modpacks from Vortex                                                |
 | Grand Perspective | Disk Usage Analyzer | ```flatpak install flathub org.gnome.baobab``` | Lets you see your disk space more easily. |
 
+### Edit Swap File
+
+	- Swap file is like the page file for windows, if your ram gets full itll use storage as ram
+
+```bash
+sudo swapoff /swap/swapfile
+sudo rm /swap/swapfile
+sudo truncate -s 0 /swap/swapfile
+sudo chattr +C /swap/swapfile
+sudo fallocate -l 6G /swap/swapfile
+sudo chmod 600 /swap/swapfile
+sudo mkswap /swap/swapfile
+sudo swapon /swap/swapfile
+```
+
+- Edit `/etc/fstab` and change the swap line to `/swap/swapfile  none swap sw 0 0`
+
+  ```bash
+  sudo nano /etc/fstab
+  ```
+
+- Check Swappiness
+
+  ```bash
+  cat /proc/sys/vm/swappiness
+  ```
+
+- Set Swappiness to 10
+
+  - Create and edit a file `/etc/sysctl.d/10-swappiness.conf` add `vm.swappiness=10`
+
+    ```bash
+    sudo nano /etc/sysctl.d/10-swappiness.conf
+    sudo sysctl --system
+    ```
+
+- The swap file will then only be used when my RAM usage is around **80** or **90** percent.
+
 ### RSYNC
+
 - Moves all files from one directory to another and validates it with checksum
 ```bash
 rsync -achP [FROM]/ [TO]
