@@ -1,0 +1,14 @@
+[Desktop Entry]
+Comment=
+Exec=/home/donovan/LM-Studio-0.3.16-8-x64.AppImage --no-sandbox
+Icon=/home/donovan/icons/4WVc54_p_400x400.png
+MimeType=x-scheme-handler/lmstudio;
+Name=LM Studio
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
