@@ -1,8 +1,11 @@
+# Donovan's Kubuntu
+
 ## My Linux Experience
+
 ### Legend
 - ✔️ **Completed**
 - ⚠️ **Possible but too difficult to do**
-- 🚫 **Not possible on linux**
+- 🚫 **Not possible on Linux**
 
 ### Challenges
 1. Play a car game with wheel ✔️ **(Use Oversteer)**
@@ -162,6 +165,66 @@ sudo nano /etc/bluetooth/main.conf
    - **replace X with amount of seconds and APP with the app you want to launch**
 3. Add `X-KDE-AutostartCondition=true` to the end of the `.desktop` file
 
+### Edit Swap File
+
+	- Swap file is like the page file for windows, if your ram gets full itll use storage as ram
+
+```bash
+sudo swapoff /swap/swapfile
+sudo rm /swap/swapfile
+sudo truncate -s 0 /swap/swapfile
+sudo chattr +C /swap/swapfile
+sudo fallocate -l 6G /swap/swapfile
+sudo chmod 600 /swap/swapfile
+sudo mkswap /swap/swapfile
+sudo swapon /swap/swapfile
+```
+
+- Edit `/etc/fstab` and change the swap line to `/swap/swapfile  none swap sw 0 0`
+
+  ```bash
+  sudo nano /etc/fstab
+  ```
+
+- Check Swappiness
+
+  ```bash
+  cat /proc/sys/vm/swappiness
+  ```
+
+- Set Swappiness to 10
+
+  - Create and edit a file `/etc/sysctl.d/10-swappiness.conf` add `vm.swappiness=10`
+
+    ```bash
+    sudo nano /etc/sysctl.d/10-swappiness.conf
+    sudo sysctl --system
+    ```
+
+- The swap file will then only be used when my RAM usage is around **80** or **90** percent.
+
+### Clear memory swap
+
+`sudo swapoff -a; sudo swapon -a` **Make sure you have enough memory to swap into physical!!**
+
+### RSYNC
+
+- Moves all files from one directory to another and validates it with checksum
+```bash
+rsync -achP [FROM]/ [TO]
+```
+
+### player-ctl Media Keys Fix
+1. Install player-ctl `sudo nala install playerctl`
+2. Goto Settings -> Shortcuts -> Custom Shortcuts -> Edit -> New -> Global Shortcut
+3. Set the trigger to whatever you want
+4. Set command to one of the following
+    ```bash
+    playerctl play-pause
+    playerctl next
+    playerctl previous
+    playerctl stop
+    ```
 
 ## Nvidia Drivers
 
@@ -220,111 +283,52 @@ sudo nano /etc/bluetooth/main.conf
 
 - Dolphin -> Hamburger Icon -> Configure -> Configure Keyboard Shortcuts
 
-## Linux Programs Installations
-| Linux               | Install |                             Notes                                                                                              |
-|---------------------|---------------------------------------------|----------------------------------------------------------------------------------------------------|
-| nala                | `sudo apt install nala`        | apt but better                                                                |
-| fastfetch  | `sudo nala install fastfetch` | Quickly get system information                                               |
-| flatpak             | `sudo nala install flatpak`        | Package installer                                                         |
-| Balenca Etcher             | https://etcher.balena.io/#download-etcher | Creates Bootable USB's|
-| Bottles             | `flatpak install flathub com.usebottles.bottles` | Run Windows applications |
-| Brave Browser | `curl -fsS https://dl.brave.com/install.sh | sh` | Chromium based and blocks ads |
-| Flatseal            | `flatpak install flathub com.github.tchx84.Flatseal` | Package permission modifer GUI                          |
-| Discord             | `flatpak install flathub com.discordapp.Discord`                         |  |
-| DSD-FME             | Read Instructions Below                         | Digital Voice Decoder  |
-| Filezilla           | `sudo nala install filezilla`                                            |   |
-| Gminer              | https://github.com/develsoftware/GMinerRelease    | Crypto Miner  |
-| Git                 | `sudo nala install git`    |   |
-| Grid Tracker        | Read Instrcutions Below    | Program used to mark Ft8 locations  |
-| Gpredict            | `sudo nala install gpredict`    | Program used to track satelites  |
-| Chirp               | Read Instructions Below    | Radio programming application  |
-| Earth               | https://www.google.com/earth/about/versions/ |   |
-| Handbrake             | `flatpak install flathub fr.handbrake.ghb`   | Video compression tool  |
-| Jackett             | `sudo git clone https://github.com/Jackett/Jackett.git /usr/share/Jackett/`   |   |
-| Linux Gamemode      | Read Instructions Below                | Enables gamemode on linux  |
-| LM Studio | https://lmstudio.ai/download | Lets you host LLMs from huggingface and other places |
-| NOAA-APT            | https://noaa-apt.mbernardi.com.ar/download.html | Decodes APT wav files  |
-| Overlayed | https://github.com/overlayeddev/overlayed/releases | Gives you voice activity overlay for Discord |
-| Playback          |   Read instructions below                            | Program for the Gameboy cart reader  |
-| player-ctl          | `sudo nala install playerctl`                               | Fixes media keys on keyboard, Read Instructions  |
-| Plex HTPC           | `flatpak install flathub tv.plex.PlexHTPC`                               |   |
-| Plex AMP           | `flatpak install flathub com.plexamp.Plexamp`                               |   |
-| Qbittorent          | `flatpak install flathub org.qbittorrent.qBittorrent`                    |   |
-| Radiosonde Auto RX  | Read Instructions Below                             | Radiosonde tracker  |
-| Rustdesk            | https://github.com/rustdesk/rustdesk/releases                                                | VNC Server and Viewer  |
-| SatDump             | Read Instructions Below                             | Satelite Decoding Program  |
-| SDR++               | Read Instructions Below                             | SDR monitoring program  |
-| SDRangel            | Read Compile Instructions [Here](https://github.com/f4exb/sdrangel/wiki/Compile-from-source-in-Linux)                             | All in one SDR program  |
-| Spotify             | `flatpak install flathub com.spotify.Client`                             |   |
-| spotdl             | Read Instrcutions Below                             |   |
-| Steam               | `flatpak install flathub com.valvesoftware.Steam`     | Open Flatseal and add the location of external drives to the filesystem section of Steam, This makes it so steam can use those drives. |
-| Typora | https://typora.io/#linux | Markdown Editor |
-| Visual Studio Code  | https://code.visualstudio.com/download |   |
-| VLC                 | `sudo nala install vlc`                                                  |   |
-| Virtual Box         | `sudo nala install virtualbox --install-suggests`           |   |
-| Video Trimmer         | `flatpak install flathub org.gnome.gitlab.YaLTeR.VideoTrimmer`           | Lets you easly trim videos  |
-| Vencord | ```sh -c "$(curl -sS https://raw.githubusercontent.com/Vendicated/VencordInstaller/main/install.sh)"``` | Lets you use custom themes on Discord |
-| Vesktop | https://github.com/Vencord/Vesktop/releases **USE DEB PACKAGE** | Lets you use RPC on Discord (Must have [arRPC](https://github.com/OpenAsar/arRPC)) and custom themes |
-| Windscribe          | https://windscribe.com/download/ |   |
-| yt-dlp          | `sudo snap install --edge yt-dlp`                | Download youtube videos through the terminal  |
-
-## Linux Alternatives
-
-| Windows                 | Linux               | Install                                                   | Notes                                                                                              |
-|-------------------------|---------------------|-----------------------------------------------------------|----------------------------------------------------------------------------------------------------|
-| Logitech G Hub (Wheel)  | Oversteer           | `flatpak install flathub io.github.berarma.Oversteer`                  | Lets you change steering wheel config                                                              |
-| Logitech G Hub (Mouse)  | Piper               | `sudo nala install piper`             | Lets you change mouse config. Run `sudo nala install ratbagd` if Piper doesnt work                                                                      |
-| Nvidia Shadow Play      | GPU screen recorder | `flatpak install flathub com.dec05eba.gpu_screen_recorder`  | For "Record that" feature, and simple screen recording/screenshots <br><br> **If you want AV1 encoding then you have to build from source**                                 |
-| Curse Forge (Minecraft) | Prism Launcher      | `flatpak install flathub org.prismlauncher.PrismLauncher`   | Lets you download mods and modpacks from Curseforge                                                |
-| Equalizer APO | Easy Effects      | `flatpak install flathub com.github.wwmm.easyeffects`   | Equalizer                                                |
-| MSI Afterburner (Overlay)| Goverlay           | `sudo nala install goverlay`                                | Overlay of system information <br> If using flatpak steam run these commands <br><br> Add `xdg-config/MangoHud:ro` To flatseal in the Steam filesystem section<br><br>`flatpak install flathub org.freedesktop.Platform.VulkanLayer.MangoHud` <br><br> `flatpak override --user --env=MANGOHUD=1 com.valvesoftware.Steam` <br><br> `sudo flatpak override --filesystem=xdg-config/MangoHud:ro` <br><br> Enable `Global Enable` in Goverlay                                                                    |
-| Vortex | Bottles with Vortex      | Read instructions below   | Lets you download mods and modpacks from Vortex                                                |
-| Grand Perspective | Disk Usage Analyzer | ```flatpak install flathub org.gnome.baobab``` | Lets you see your disk space more easily. |
-
-### Edit Swap File
-
-	- Swap file is like the page file for windows, if your ram gets full itll use storage as ram
-
-```bash
-sudo swapoff /swap/swapfile
-sudo rm /swap/swapfile
-sudo truncate -s 0 /swap/swapfile
-sudo chattr +C /swap/swapfile
-sudo fallocate -l 6G /swap/swapfile
-sudo chmod 600 /swap/swapfile
-sudo mkswap /swap/swapfile
-sudo swapon /swap/swapfile
-```
-
-- Edit `/etc/fstab` and change the swap line to `/swap/swapfile  none swap sw 0 0`
-
-  ```bash
-  sudo nano /etc/fstab
-  ```
-
-- Check Swappiness
-
-  ```bash
-  cat /proc/sys/vm/swappiness
-  ```
-
-- Set Swappiness to 10
-
-  - Create and edit a file `/etc/sysctl.d/10-swappiness.conf` add `vm.swappiness=10`
-
-    ```bash
-    sudo nano /etc/sysctl.d/10-swappiness.conf
-    sudo sysctl --system
-    ```
-
-- The swap file will then only be used when my RAM usage is around **80** or **90** percent.
-
-### RSYNC
-
-- Moves all files from one directory to another and validates it with checksum
-```bash
-rsync -achP [FROM]/ [TO]
-```
+## Linux Programs
+| Linux               | Install |                             Package Manager                                       |                             Notes                                                                                              |
+|---------------------|---------------------------------------------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| nala                | `sudo apt install nala`        | `apt`                                                           | apt but better                                                                |
+| fastfetch  | `sudo nala install fastfetch` | `nala`                                        | Quickly get system information                                               |
+| flatpak             | `sudo nala install flatpak`        | `nala`                                                   | Package installer                                                         |
+| Balenca Etcher             | https://etcher.balena.io/#download-etcher | `.deb` | Creates Bootable USB's|
+| Bottles             | `flatpak install flathub com.usebottles.bottles` | `flatpak` | Run Windows applications |
+| Brave Browser | `curl -fsS https://dl.brave.com/install.sh | sh` | `curl` | Chromium based and blocks ads |
+| Flatseal            | `flatpak install flathub com.github.tchx84.Flatseal` | `flatpak`                 | Package permission modifer GUI                          |
+| Discord             | `flatpak install flathub com.discordapp.Discord`                         | `flatpak` |  |
+| DSD-FME             | Read [Instructions](#DSD-FME)            |   | Digital Voice Decoder  |
+| Gminer              | https://github.com/develsoftware/GMinerRelease    |   | Crypto Miner  |
+| Git                 | `sudo nala install git`    | `nala` |   |
+| Grid Tracker        | Read [Instructions](#Grid Tracker) |   | Program used to mark Ft8 locations  |
+| Gpredict            | `sudo nala install gpredict`    | `nala` | Program used to track satelites  |
+| Github Desktop | Goto https://github.com/shiftkey/desktop/releases/ | `.deb` | Git control but with UI |
+| Chirp               | Read [Instructions](#Chirp) |   | Radio programming application  |
+| Earth               | https://www.google.com/earth/about/versions/ | `.deb` |   |
+| Handbrake             | `flatpak install flathub fr.handbrake.ghb`   | `flatpak` | Video compression tool  |
+| Jackett             | `sudo git clone https://github.com/Jackett/Jackett.git /usr/share/Jackett/`   |   |   |
+| Linux Gamemode      | Read [Instructions](#Linux-Gamemode) |   | Enables gamemode on Linux |
+| LM Studio | https://lmstudio.ai/download | `.AppImage` | Lets you host LLMs from huggingface and other places |
+| NOAA-APT            | https://noaa-apt.mbernardi.com.ar/download.html | `.deb` | Decodes APT wav files  |
+| Overlayed | https://github.com/overlayeddev/overlayed/releases | `.AppImage` | Gives you voice activity overlay for Discord |
+| Playback          |   Read instructions below                            |   | Program for the Gameboy cart reader  |
+| player-ctl          | `sudo nala install playerctl`                               | `nala` | Fixes media keys on keyboard, Read Instructions  |
+| Plex HTPC           | `flatpak install flathub tv.plex.PlexHTPC`                               | `flatpak` |   |
+| Plex AMP           | `flatpak install flathub com.plexamp.Plexamp`                               | `flatpak` |   |
+| Qbittorent          | `flatpak install flathub org.qbittorrent.qBittorrent`                    | `flatpak` |   |
+| Radiosonde Auto RX  | Read Instructions Below                             |   | Radiosonde tracker  |
+| RustDesk           | `flatpak install flathub com.rustdesk.RustDesk` | `flatpak` | VNC Server and Viewer  |
+| SatDump             | Read Instructions Below                             |   | Satelite Decoding Program  |
+| SDR++               | Read Instructions Below                             |   | SDR monitoring program  |
+| SDRangel            | Read Compile Instructions [Here](https://github.com/f4exb/sdrangel/wiki/Compile-from-source-in-Linux)                             |   | All in one SDR program  |
+| Spotify             | `flatpak install flathub com.spotify.Client`                             | `flatpak` |   |
+| spotdl             | Read Instrcutions Below                             |   |   |
+| Steam               | `flatpak install flathub com.valvesoftware.Steam`     | `flatpak` | Open Flatseal and add the location of external drives to the filesystem section of Steam, This makes it so steam can use those drives. |
+| Typora | https://typora.io/#linux | `.deb` | Markdown Editor |
+| Visual Studio Code  | https://code.visualstudio.com/download | `.deb` |   |
+| VLC                 | `sudo nala install vlc`                                                  | `nala` |   |
+| Video Trimmer         | `flatpak install flathub org.gnome.gitlab.YaLTeR.VideoTrimmer`           | `flatpak` | Lets you easly trim videos  |
+| Vencord | ```sh -c "$(curl -sS https://raw.githubusercontent.com/Vendicated/VencordInstaller/main/install.sh)"``` | `curl` | Lets you use custom themes on Discord |
+| Vesktop | https://github.com/Vencord/Vesktop/releases | `.deb` | Lets you use RPC on Discord (Must have [arRPC](https://github.com/OpenAsar/arRPC)) and custom themes |
+| Windscribe          | https://windscribe.com/download/ | `.deb` | VPN |
+| yt-dlp          | `sudo snap install --edge yt-dlp`                | `snap` | Download youtube videos through the terminal  |
 
 ### Linux Gamemode
 ```bash
@@ -386,19 +390,30 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="1209", ATTR{idProduct}=="db42", MODE="0666"
 ```
 6. Save the file[ctrl+x] and restart
 
-### player-ctl Media Keys Fix
-1. Install player-ctl `sudo nala install playerctl`
-2. Goto Settings -> Shortcuts -> Custom Shortcuts -> Edit -> New -> Global Shortcut
-3. Set the trigger to whatever you want
-4. Set command to one of the following
-    ```bash
-    playerctl play-pause
-    playerctl next
-    playerctl previous
-    playerctl stop
-    ```
+### spotdl
+
+```bash
+sudo nala install pipx
+pipx install spotdl
+# To Run
+pipx run spotdl
+```
+
+## Linux Alternatives
+
+| Windows                 | Linux               | Install                                                   | Notes                                                                                              |
+|-------------------------|---------------------|-----------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| Logitech G Hub (Wheel)  | Oversteer           | `flatpak install flathub io.github.berarma.Oversteer`                  | Lets you change steering wheel config                                                              |
+| Logitech G Hub (Mouse)  | Solaar        | `sudo nala install solaar`        | Lets you change mouse config.                                                                     |
+| Nvidia Shadow Play      | GPU screen recorder | `flatpak install flathub com.dec05eba.gpu_screen_recorder`  | For "Record that" feature, and simple screen recording/screenshots <br><br> **If you want AV1 encoding then you have to build from source**                                 |
+| Curse Forge (Minecraft) | Prism Launcher      | `flatpak install flathub org.prismlauncher.PrismLauncher`   | Lets you download mods and modpacks from Curseforge                                                |
+| Equalizer APO | Easy Effects      | `flatpak install flathub com.github.wwmm.easyeffects`   | Equalizer                                                |
+| MSI Afterburner (Overlay)| Goverlay           | `sudo nala install goverlay`                                | Overlay of system information <br> If using flatpak steam run these commands <br><br> Add `xdg-config/MangoHud:ro` To flatseal in the Steam filesystem section<br><br>`flatpak install flathub org.freedesktop.Platform.VulkanLayer.MangoHud` <br><br> `flatpak override --user --env=MANGOHUD=1 com.valvesoftware.Steam` <br><br> `sudo flatpak override --filesystem=xdg-config/MangoHud:ro` <br><br> Enable `Global Enable` in Goverlay                                                                    |
+| Vortex | Bottles with Vortex      | Read [Instructions](#Bottles-Steam-and-Vortex-Modding-Instructions) | Lets you download mods and modpacks from Vortex                                                |
+| Grand Perspective | Disk Usage Analyzer | ```flatpak install flathub org.gnome.baobab``` | Lets you see your disk space more easily. |
 
 ### Bottles Steam and Vortex Modding Instructions:
+
 1. Open flatseal and add External Drive locations to the Bottles section of flatseal E.G Other Files
 2. run `flatpak override --user com.usebottles.bottles --filesystem=~/.var/app/com.valvesoftware.Steam/data/Steam`
 3. Enable Proton in Bottles. Settings -> General -> Intergrations -> Steam Proton Prefix -> On
@@ -407,18 +422,11 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="1209", ATTR{idProduct}=="db42", MODE="0666"
 6. Once done installing click on `Add shortcuts`
 7. Add Vortex * Normally its installed here `/steamapps/compatdata/STEAMID/pfx/drive_c/Program Files/Black Tree Gaming Ltd/Vortex/Vortex.exe`
 8. Run Vortex and mod! *Drag and drop zip files into Vortex to install mods*
-- Fallout New Vegas
-    - **NVSE**
-        - Install it using Vortex
-        - Go to game dir and rename `nvse_loader.exe` to `FalloutNVLauncher.exe`
 
-### spotdl
-```bash
-sudo nala install pipx
-pipx install spotdl
-# To Run
-pipx run spotdl
-```
+- Fallout New Vegas
+  - **NVSE**
+    - Install it using Vortex
+    - Go to game dir and rename `nvse_loader.exe` to `FalloutNVLauncher.exe`
 
 ## SDR Programs
 
