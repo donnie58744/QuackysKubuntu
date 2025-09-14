@@ -316,7 +316,7 @@ rsync -achP [FROM]/ [TO]
 | Radiosonde Auto RX  | Read [Instructions](#Radiosonde-Auto-RX)   |   | Radiosonde tracker  |
 | RustDesk           | `flatpak install flathub com.rustdesk.RustDesk` | `flatpak` | VNC Server and Viewer  |
 | SatDump             | Read [Instructions](#SatDump)                 |   | Satelite Decoding Program  |
-| SDR++               | Read [Instructions](#SDR)                 |   | SDR monitoring program  |
+| SDRPP           | Read [Instructions](#SDRPP)               |   | SDR monitoring program  |
 | SDRangel            | Read Compile [Instructions](https://github.com/f4exb/sdrangel/wiki/Compile-from-source-in-Linux) |   | All in one SDR program  |
 | Spotify             | `flatpak install flathub com.spotify.Client`                             | `flatpak` |   |
 | spotdl             | Read [Instrcutions](#spotdl)                  |   |   |
@@ -447,7 +447,7 @@ sudo ldconfig
 echo 'blacklist dvb_usb_rtl28xxu' | sudo tee --append /etc/modprobe.d/blacklist-dvb_usb_rtl28xxu.conf
 ```
 
-### SDR++
+### SDRPP
 #### Deb Package
 https://github.com/AlexandreRouma/SDRPlusPlus/releases/tag/nightly
 
