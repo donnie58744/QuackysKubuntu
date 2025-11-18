@@ -165,9 +165,27 @@ sudo nano /etc/bluetooth/main.conf
    - **replace X with amount of seconds and APP with the app you want to launch**
 3. Add `X-KDE-AutostartCondition=true` to the end of the `.desktop` file
 
+### zRAM
+
+zRAM is a Linux kernel module that allows the creation of Swap devices on memory. But the catch is that it does not just create them there; it also compresses them so that the system can store more data in memory, which allows accessing this data much faster than a traditional swap on SSD or HDD devices.
+
+- Check if zRAM is already enabled
+
+  `cat /proc/swaps`
+
+- Turn Off Swap File
+  - `sudo nano /etc/fstab`
+    - Comment out `/swapfile   none   swap   sw   0    0`
+  - `sudo swapoff -a`
+- Enable zRAM
+  - `sudo apt install zram-config`
+  - `systemctl enable zram-config`
+  - `systemctl start zram-config`
+  - `sudo reboot`
+
 ### Edit Swap File
 
-	- Swap file is like the page file for windows, if your ram gets full itll use storage as ram
+Swap file is like the page file for windows, if your ram gets full itll use storage as ram
 
 ```bash
 sudo swapoff /swap/swapfile
@@ -291,15 +309,15 @@ rsync -achP [FROM]/ [TO]
 | flatpak             | `sudo nala install flatpak`        | `nala`                                                   | Package installer                                                         |
 | Balenca Etcher             | https://etcher.balena.io/#download-etcher | `.deb` | Creates Bootable USB's|
 | Bottles             | `flatpak install flathub com.usebottles.bottles` | `flatpak` | Run Windows applications |
-| Brave Browser | ```curl -fsS https://dl.brave.com/install.sh \| sh``` | `curl` | Chromium based and blocks ads |
+| Brave Browser | `curl -fsS https://dl.brave.com/install.sh | sh` | `curl` | Chromium based and blocks ads |
 | Flatseal            | `flatpak install flathub com.github.tchx84.Flatseal` | `flatpak`                 | Package permission modifer GUI                          |
 | Discord             | `flatpak install flathub com.discordapp.Discord`                         | `flatpak` |  |
 | DSD-FME             | Read [Instructions](#DSD-FME)            |   | Digital Voice Decoder  |
 | Gminer              | https://github.com/develsoftware/GMinerRelease    |   | Crypto Miner  |
 | Git                 | `sudo nala install git`    | `nala` |   |
-| Grid Tracker        | Read [Instructions](#Grid-Tracker) |   | Program used to mark Ft8 locations  |
+| Grid Tracker        | Read [Instructions](#Grid Tracker) |   | Program used to mark Ft8 locations  |
 | Gpredict            | `sudo nala install gpredict`    | `nala` | Program used to track satelites  |
-| Github Desktop | https://github.com/shiftkey/desktop/releases/ | `.deb` | Git control but with UI |
+| Github Desktop | Goto https://github.com/shiftkey/desktop/releases/ | `.deb` | Git control but with UI |
 | Chirp               | Read [Instructions](#Chirp) |   | Radio programming application  |
 | Earth               | https://www.google.com/earth/about/versions/ | `.deb` |   |
 | Handbrake             | `flatpak install flathub fr.handbrake.ghb`   | `flatpak` | Video compression tool  |
@@ -308,18 +326,18 @@ rsync -achP [FROM]/ [TO]
 | LM Studio | https://lmstudio.ai/download | `.AppImage` | Lets you host LLMs from huggingface and other places |
 | NOAA-APT            | https://noaa-apt.mbernardi.com.ar/download.html | `.deb` | Decodes APT wav files  |
 | Overlayed | https://github.com/overlayeddev/overlayed/releases | `.AppImage` | Gives you voice activity overlay for Discord |
-| Playback          |   Read [Instructions](#Playback)           |   | Program for the Gameboy cart reader  |
+| Playback          |   Read instructions below                            |   | Program for the Gameboy cart reader  |
 | player-ctl          | `sudo nala install playerctl`                               | `nala` | Fixes media keys on keyboard, Read Instructions  |
 | Plex HTPC           | `flatpak install flathub tv.plex.PlexHTPC`                               | `flatpak` |   |
 | Plex AMP           | `flatpak install flathub com.plexamp.Plexamp`                               | `flatpak` |   |
 | Qbittorent          | `flatpak install flathub org.qbittorrent.qBittorrent`                    | `flatpak` |   |
-| Radiosonde Auto RX  | Read [Instructions](#Radiosonde-Auto-RX)   |   | Radiosonde tracker  |
+| Radiosonde Auto RX  | Read Instructions Below                             |   | Radiosonde tracker  |
 | RustDesk           | `flatpak install flathub com.rustdesk.RustDesk` | `flatpak` | VNC Server and Viewer  |
-| SatDump             | Read [Instructions](#SatDump)                 |   | Satelite Decoding Program  |
-| SDRPP           | Read [Instructions](#SDRPP)               |   | SDR monitoring program  |
-| SDRangel            | Read Compile [Instructions](https://github.com/f4exb/sdrangel/wiki/Compile-from-source-in-Linux) |   | All in one SDR program  |
+| SatDump             | Read Instructions Below                             |   | Satelite Decoding Program  |
+| SDR++               | Read Instructions Below                             |   | SDR monitoring program  |
+| SDRangel            | Read Compile Instructions [Here](https://github.com/f4exb/sdrangel/wiki/Compile-from-source-in-Linux)                             |   | All in one SDR program  |
 | Spotify             | `flatpak install flathub com.spotify.Client`                             | `flatpak` |   |
-| spotdl             | Read [Instrcutions](#spotdl)                  |   |   |
+| spotdl             | Read Instrcutions Below                             |   |   |
 | Steam               | `flatpak install flathub com.valvesoftware.Steam`     | `flatpak` | Open Flatseal and add the location of external drives to the filesystem section of Steam, This makes it so steam can use those drives. |
 | Typora | https://typora.io/#linux | `.deb` | Markdown Editor |
 | Visual Studio Code  | https://code.visualstudio.com/download | `.deb` |   |
@@ -401,16 +419,16 @@ pipx run spotdl
 
 ## Linux Alternatives
 
-| Windows                 | Linux               | Install                                                   | Package Manager                                                                               | Notes                                                                                              |
-|-------------------------|---------------------|-----------------------------------------------------------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
-| Logitech G Hub (Wheel)  | Oversteer           | `flatpak install flathub io.github.berarma.Oversteer`                  | `flatpak`                                                    | Lets you change steering wheel config                                                              |
-| Logitech G Hub (Mouse)  | Solaar        | `sudo nala install solaar`        | `nala`                                                               | Lets you change mouse config.                                                                     |
-| Nvidia Shadow Play      | GPU screen recorder | `flatpak install flathub com.dec05eba.gpu_screen_recorder`  | `flatpak`                        | For "Record that" feature, and simple screen recording/screenshots <br><br> **If you want AV1 encoding then you have to build from source**                                 |
-| Curse Forge (Minecraft) | Prism Launcher      | `flatpak install flathub org.prismlauncher.PrismLauncher`   | `flatpak`                                       | Lets you download mods and modpacks from Curseforge                                                |
-| Equalizer APO | Easy Effects      | `flatpak install flathub com.github.wwmm.easyeffects`   | `flatpak`                                       | Equalizer                                                |
-| MSI Afterburner (Overlay)| Goverlay           | `sudo nala install goverlay`                                | `nala`                                                              | Overlay of system information <br> If using flatpak steam run these commands <br><br> Add `xdg-config/MangoHud:ro` To flatseal in the Steam filesystem section<br><br>`flatpak install flathub org.freedesktop.Platform.VulkanLayer.MangoHud` <br><br> `flatpak override --user --env=MANGOHUD=1 com.valvesoftware.Steam` <br><br> `sudo flatpak override --filesystem=xdg-config/MangoHud:ro` <br><br> Enable `Global Enable` in Goverlay                                                                    |
-| Vortex | Bottles with Vortex      | Read [Instructions](#Bottles-Steam-and-Vortex-Modding-Instructions) |                                                 | Lets you download mods and modpacks from Vortex                                                |
-| Grand Perspective | Disk Usage Analyzer | ```flatpak install flathub org.gnome.baobab``` | `flatpak` | Lets you see your disk space more easily. |
+| Windows                 | Linux               | Install                                                   | Notes                                                                                              |
+|-------------------------|---------------------|-----------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| Logitech G Hub (Wheel)  | Oversteer           | `flatpak install flathub io.github.berarma.Oversteer`                  | Lets you change steering wheel config                                                              |
+| Logitech G Hub (Mouse)  | Solaar        | `sudo nala install solaar`        | Lets you change mouse config.                                                                     |
+| Nvidia Shadow Play      | GPU screen recorder | `flatpak install flathub com.dec05eba.gpu_screen_recorder`  | For "Record that" feature, and simple screen recording/screenshots <br><br> **If you want AV1 encoding then you have to build from source**                                 |
+| Curse Forge (Minecraft) | Prism Launcher      | `flatpak install flathub org.prismlauncher.PrismLauncher`   | Lets you download mods and modpacks from Curseforge                                                |
+| Equalizer APO | Easy Effects      | `flatpak install flathub com.github.wwmm.easyeffects`   | Equalizer                                                |
+| MSI Afterburner (Overlay)| Goverlay           | `sudo nala install goverlay`                                | Overlay of system information <br> If using flatpak steam run these commands <br><br> Add `xdg-config/MangoHud:ro` To flatseal in the Steam filesystem section<br><br>`flatpak install flathub org.freedesktop.Platform.VulkanLayer.MangoHud` <br><br> `flatpak override --user --env=MANGOHUD=1 com.valvesoftware.Steam` <br><br> `sudo flatpak override --filesystem=xdg-config/MangoHud:ro` <br><br> Enable `Global Enable` in Goverlay                                                                    |
+| Vortex | Bottles with Vortex      | Read [Instructions](#Bottles-Steam-and-Vortex-Modding-Instructions) | Lets you download mods and modpacks from Vortex                                                |
+| Grand Perspective | Disk Usage Analyzer | ```flatpak install flathub org.gnome.baobab``` | Lets you see your disk space more easily. |
 
 ### Bottles Steam and Vortex Modding Instructions:
 
@@ -447,7 +465,7 @@ sudo ldconfig
 echo 'blacklist dvb_usb_rtl28xxu' | sudo tee --append /etc/modprobe.d/blacklist-dvb_usb_rtl28xxu.conf
 ```
 
-### SDRPP
+### SDR++
 #### Deb Package
 https://github.com/AlexandreRouma/SDRPlusPlus/releases/tag/nightly
 
