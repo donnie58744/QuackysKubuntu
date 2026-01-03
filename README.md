@@ -321,6 +321,7 @@ rsync -achP [FROM]/ [TO]
 | Chirp               | Read [Instructions](#Chirp) |   | Radio programming application  |
 | Earth               | https://www.google.com/earth/about/versions/ | `.deb` |   |
 | Handbrake             | `flatpak install flathub fr.handbrake.ghb`   | `flatpak` | Video compression tool  |
+| Herioc Games Launcher             | `flatpak install flathub com.heroicgameslauncher.hgl`   | `flatpak` | Launcher for GOG, Epic, and Amazon Games  |
 | Jackett             | `sudo git clone https://github.com/Jackett/Jackett.git /usr/share/Jackett/`   |   |   |
 | Linux Gamemode      | Read [Instructions](#Linux-Gamemode) |   | Enables gamemode on Linux |
 | LM Studio | https://lmstudio.ai/download | `.AppImage` | Lets you host LLMs from huggingface and other places |
