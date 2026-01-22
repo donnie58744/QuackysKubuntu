@@ -227,9 +227,15 @@ sudo swapon /swap/swapfile
 
 ### RSYNC
 
-- Moves all files from one directory to another and validates it with checksum
+- Moves all files from one directory to another
+
 ```bash
-rsync -achP [FROM]/ [TO]
+rsync -ahP [FROM]/ [TO]
+```
+- Validate Copy With Checksum
+
+``` bash
+rsync -ahPc --dry-run [FROM]/ [TO]
 ```
 
 ### player-ctl Media Keys Fix
