@@ -116,6 +116,18 @@ sudo nano /etc/bluetooth/main.conf
 
 ### Errors and Fixes
 
+#### Black Screen of Death
+- Try to restart display manager
+
+    1. Press *Ctrl + Alt + F3*
+    2. `sudo systemctl restart sddm`
+    3. Press *Ctrl + Alt + F1*
+
+- One thing to try would be to **reinstall GPU drivers**
+    1. Press *Ctrl + Alt + F3*
+    2. `sudo ubuntu-drivers install`
+    3. `sudo reboot`
+
 #### Flatpak
 
 - Fix `apply_extra script` error
