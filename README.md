@@ -240,14 +240,23 @@ sudo swapon /swap/swapfile
 ### RSYNC
 
 - Moves all files from one directory to another
+    - To copy a whole drive do `/source/ /destination/` instead
 
 ```bash
-rsync -ahP [FROM]/ [TO]
-```
+rsync -ahPc [FROM]/ [TO]
+``` 
 - Validate Copy With Checksum
 
 ``` bash
 rsync -ahPc --dry-run [FROM]/ [TO]
+```
+
+### Diff
+
+- Validate all files in a drive are the same as a parent drive
+
+```bash
+diff -rq /mnt/source/ /mnt/destination/
 ```
 
 ### player-ctl Media Keys Fix
