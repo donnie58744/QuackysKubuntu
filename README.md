@@ -200,8 +200,10 @@ zRAM is a Linux kernel module that allows the creation of Swap devices on memory
 Swap file is like the page file for windows, if your ram gets full itll use storage as ram
 
 ```bash
+cd ~
 sudo swapoff /swap/swapfile
 sudo rm /swap/swapfile
+sudo mkdir -p /swap
 sudo truncate -s 0 /swap/swapfile
 sudo chattr +C /swap/swapfile
 sudo fallocate -l 6G /swap/swapfile
