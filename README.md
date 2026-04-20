@@ -224,7 +224,7 @@ sudo swapon /swap/swapfile
   cat /proc/sys/vm/swappiness
   ```
 
-- Set Swappiness to 10
+- Set Swappiness to 10 *I wouldnt set it lower as it makes the OS very schizo*
 
   - Create and edit a file `/etc/sysctl.d/10-swappiness.conf` add `vm.swappiness=10`
 
