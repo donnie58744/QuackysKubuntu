@@ -61,6 +61,15 @@
 
 - If a Proton game crashes, try and turn off steam overlay before anything else
 
+### Custom PATH/bin Commands
+
+- If you want custom scripts that can be called directly through the terminal without navigating to a specific folder.
+
+1. Move the `.sh` script to `/usr/local/bin`
+2. Then run `sudo chmod +x custom_script.sh`
+
+- Youll then be able to just type `custom_script.sh` in any terminal anywhere and itll run that script
+
 ### Random Linux Commands
 
 - Set Dolphin as default file manager `xdg-mime default org.kde.dolphin.desktop inode/directory`
