@@ -204,9 +204,9 @@ zRAM is a Linux kernel module that allows the creation of Swap devices on memory
   - `systemctl start zram-config`
   - `sudo reboot`
 
-### Customizing zram-config (Optional)
+#### Customizing zram-config (Optional)
 
-#### Modify ZRAM
+##### Modify ZRAM
 *(such as the ZRAM size or compression algorithm), you can edit the initialization script.*
 
 - Open `usr/bin/init-zram-swapping` in your preferred text editor.
