@@ -356,7 +356,7 @@ diff -rq /mnt/source/ /mnt/destination/
 | flatpak             | `sudo nala install flatpak`        | `nala`                                                   | Package installer                                                         |
 | Balenca Etcher             | https://etcher.balena.io/#download-etcher | `.deb` | Creates Bootable USB's|
 | Bottles             | `flatpak install flathub com.usebottles.bottles` | `flatpak` | Run Windows applications |
-| Brave Browser | `curl -fsS https://dl.brave.com/install.sh | sh` | `curl` | Chromium based and blocks ads |
+| Brave Browser | `curl -fsS https://dl.brave.com/install.sh` | `sh` | `curl` | Chromium based and blocks ads |
 | Flatseal            | `flatpak install flathub com.github.tchx84.Flatseal` | `flatpak`                 | Package permission modifer GUI                          |
 | Discord             | `flatpak install flathub com.discordapp.Discord`                         | `flatpak` |  |
 | DSD-FME             | Read [Instructions](#DSD-FME)            |   | Digital Voice Decoder  |
@@ -371,6 +371,7 @@ diff -rq /mnt/source/ /mnt/destination/
 | Herioc Games Launcher             | `flatpak install flathub com.heroicgameslauncher.hgl`   | `flatpak` | Launcher for GOG, Epic, and Amazon Games  |
 | Jackett             | `sudo git clone https://github.com/Jackett/Jackett.git /usr/share/Jackett/`   |   |   |
 | Linux Gamemode      | Read [Instructions](#Linux-Gamemode) |   | Enables gamemode on Linux |
+| LSFG-VK | https://github.com/PancakeTAS/lsfg-vk | `.tar` | Loseless Frame Gen - Vulkan
 | LM Studio | https://lmstudio.ai/download | `.AppImage` | Lets you host LLMs from huggingface and other places |
 | NOAA-APT            | https://noaa-apt.mbernardi.com.ar/download.html | `.deb` | Decodes APT wav files  |
 | Overlayed | https://github.com/overlayeddev/overlayed/releases | `.AppImage` | Gives you voice activity overlay for Discord |
@@ -395,6 +396,16 @@ diff -rq /mnt/source/ /mnt/destination/
 | Vesktop | https://github.com/Vencord/Vesktop/releases | `.deb` | Lets you use RPC on Discord (Must have [arRPC](https://github.com/OpenAsar/arRPC)) and custom themes |
 | Windscribe          | https://windscribe.com/download/ | `.deb` | VPN |
 | yt-dlp          | `sudo snap install --edge yt-dlp`                | `snap` | Download youtube videos through the terminal  |
+
+### LSFG-VK
+- Set games on Steam to use `lsfg-vk`
+    
+    1. Open the LSFG-VK ui and create a new profile
+    2. Change settings and give it a name
+    3. Goto Steam right click on the game click properties and add the following to launch options
+    ```bash
+    LSFG_PROCESS=PROFILE_NAME
+    ```
 
 ### Linux Gamemode
 ```bash
